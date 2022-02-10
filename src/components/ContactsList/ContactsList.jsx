@@ -15,7 +15,7 @@ export default function ContactsList({ contacts, filter, onDelete }) {
             id={id}
             name={name}
             number={number}
-            onDelete={onDelete}
+            onDelete={() => onDelete(id)}
           />
         );
       })}
