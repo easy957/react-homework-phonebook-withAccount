@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
 import Contact from './Contact';
 
-export default function ContactsList({ contacts, filter, onDelete }) {
-  const normalizedFilter = filter.toLowerCase();
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
+export default function ContactsList({ contacts, onDelete }) {
   return (
     <ul>
-      {visibleContacts.map(({ id, name, number }) => {
+      {contacts.map(({ id, name, number }) => {
         return (
           <Contact
             key={id}
