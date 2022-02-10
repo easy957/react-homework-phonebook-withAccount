@@ -1,0 +1,18 @@
+.wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.label {
+  padding: 5px 10px;
+  background-color: bisque;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input {
+  background-color: beige;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
