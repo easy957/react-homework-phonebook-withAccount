@@ -22,3 +22,7 @@ ul {
 p {
   margin: 0;
 }
+
+button {
+  color: inherit;
+}
