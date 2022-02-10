@@ -27,7 +27,7 @@ export default class ContactForm extends Component {
   render() {
     return (
       <form className={s.wrapper} onSubmit={this.handleSubmit}>
-        <div>
+        <div className={s.labelBox}>
           <label className={s.label}>
             Name
             <input
@@ -42,7 +42,7 @@ export default class ContactForm extends Component {
             />
           </label>
         </div>
-        <div>
+        <div className={s.labelBox}>
           <label className={s.label}>
             Number
             <input

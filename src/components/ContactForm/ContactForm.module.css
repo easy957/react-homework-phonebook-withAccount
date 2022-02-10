@@ -1,17 +1,24 @@
 .wrapper {
-  max-width: 300px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
+.labelBox {
+  flex-basis: calc(50% - 5px);
+}
 .label {
+  box-sizing: border-box;
   padding: 5px 10px;
   background-color: bisque;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 .input {
+  margin-left: 20px;
   background-color: beige;
   border-width: 1px;
   border-radius: 5px;
@@ -22,8 +29,14 @@
   display: block;
   padding: 5px 20px;
   background-color: bisque;
-  margin: 0 auto;
+  margin: 10px auto 0;
   border: 1px solid rgb(118, 118, 118);
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .labelBox {
+    flex-basis: 100%;
+  }
 }
