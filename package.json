@@ -1,8 +1,8 @@
 {
-  "name": "react-homework-phonebook",
+  "name": "react-homework-phonebook-localStorage",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://easy957.github.io/react-homework-phonebook/",
+  "homepage": "https://easy957.github.io/react-homework-phonebook-localStorage/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.1",
