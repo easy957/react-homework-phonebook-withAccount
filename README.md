@@ -1,1 +1,1 @@
-https://easy957.github.io/react-homework-phonebook/
+ https://easy957.github.io/react-homework-phonebook-localStorage/
