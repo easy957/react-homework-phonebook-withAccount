@@ -1,17 +1,59 @@
+import ContactsPage from 'pages/PhoneBookPage';
+import RegisterPage from 'pages/RegisterPage';
+import LoginPage from 'pages/LoginPage';
+import { Route, Routes } from 'react-router-dom';
+import AppBar from './AppBar';
 import Container from './Container';
-import ContactForm from './ContactForm';
-import Filter from './Filter';
-import ContactsList from './ContactsList';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/auth/auth-operations';
+import { useSelector } from 'react-redux';
+import { getUserRefreshing } from 'redux/auth/auth-selectors';
+import HomePage from 'pages/HomePage';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export function App() {
-  return (
-    <Container>
-      <h1>PhoneBook</h1>
-      <ContactForm />
+  const dispatch = useDispatch();
+  const isRefreshingUser = useSelector(getUserRefreshing);
 
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactsList />
-    </Container>
+  useEffect(() => dispatch(authOperations.refreshUser()), [dispatch]);
+
+  return (
+    <>
+      {!isRefreshingUser && (
+        <Container>
+          <AppBar />
+          <Routes>
+            <Route path="/" element={<PublicRoute component={HomePage} />} />
+
+            <Route
+              path="/registration"
+              element={
+                <PublicRoute
+                  redirectTo={'/contacts'}
+                  restricted
+                  component={RegisterPage}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute
+                  redirectTo={'/contacts'}
+                  restricted
+                  component={LoginPage}
+                />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={<PrivateRoute component={ContactsPage} />}
+            />
+          </Routes>
+        </Container>
+      )}
+    </>
   );
 }

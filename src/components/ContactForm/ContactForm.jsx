@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import s from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import phonebookActions from 'redux/phonebook/phonebook-actions';
+import contactsOperations from 'redux/phonebook/phonebook-operations';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -15,7 +15,7 @@ export default function ContactForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(phonebookActions.addContact(name, number));
+    dispatch(contactsOperations.addContact({ name, number }));
     setName('');
     setNumber('');
   }
