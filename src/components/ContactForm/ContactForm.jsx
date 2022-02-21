@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import contactsOperations from 'redux/phonebook/phonebook-operations';
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, message, Spin } from 'antd';
 import { PhoneOutlined, UserAddOutlined } from '@ant-design/icons/lib/icons';
 import { useForm } from 'antd/lib/form/Form';
 import { getContacts } from 'redux/phonebook/phonebook-selectors';
+import { useState } from 'react';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
   const [form] = useForm();
   const contacts = useSelector(getContacts);
+  const [isAdding, setIsAdding] = useState(false);
 
   function handleSubmit({ name, number }) {
     const isNameInContacts = contacts.find(
@@ -16,11 +18,18 @@ export default function ContactForm() {
     );
 
     if (isNameInContacts) {
-      console.log('name in contacts');
+      message.error('Contact with this name is already in your contacts list.');
       return;
     }
-    dispatch(contactsOperations.addContact({ name, number }));
-    form.resetFields();
+
+    setIsAdding(
+      true,
+      dispatch(contactsOperations.addContact({ name, number }))
+        .then(form.resetFields())
+        .then(() => {
+          setIsAdding(false);
+        })
+    );
   }
 
   return (
@@ -32,7 +41,7 @@ export default function ContactForm() {
     >
       <Form.Item
         name="name"
-        rules={[{ required: true, message: 'Please input your contact name!' }]}
+        rules={[{ message: 'Please input your contact name!' }]}
       >
         <Input
           prefix={<UserAddOutlined className="site-form-item-icon" />}
@@ -55,8 +64,8 @@ export default function ContactForm() {
         />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Create contact
+        <Button disabled={isAdding} type="primary" htmlType="submit">
+          {isAdding ? <Spin /> : 'Add contact'}
         </Button>
       </Form.Item>
     </Form>

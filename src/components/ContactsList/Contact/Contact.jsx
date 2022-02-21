@@ -1,23 +1,28 @@
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import contactsOperations from 'redux/phonebook/phonebook-operations';
-import s from './Contact.module.css';
 
 export default function Contact({ id, name, number }) {
   const dispatch = useDispatch();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const onDelete = () => {
-    dispatch(contactsOperations.deleteContact(id));
+    setIsDeleting(
+      true,
+      dispatch(contactsOperations.deleteContact(id)).then(setIsDeleting(false))
+    );
   };
 
   return (
     <>
       <p>
-        {name}: {number}
+        {name} - <b>{number}</b>
       </p>
-      <Button danger type="primary" onClick={onDelete}>
-        Delete
+
+      <Button disabled={isDeleting} danger type="primary" onClick={onDelete}>
+        {isDeleting ? <Spin /> : 'Delete'}
       </Button>
     </>
   );

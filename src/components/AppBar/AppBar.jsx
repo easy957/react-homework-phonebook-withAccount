@@ -6,6 +6,7 @@ import {
   UserAddOutlined,
 } from '@ant-design/icons/lib/icons';
 import { Col, Menu, Row } from 'antd';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -14,10 +15,15 @@ import { authOperations } from 'redux/auth/auth-operations';
 import { getIsLoggedIn } from 'redux/auth/auth-selectors';
 
 export default function AppBar() {
+  const [currentMenu, setCurrentMenu] = useState('');
   const dispatch = useDispatch();
 
   const onLogOut = () => {
     dispatch(authOperations.logOut());
+  };
+
+  const handleClick = e => {
+    setCurrentMenu(e.key);
   };
 
   const isLoggedIn = useSelector(getIsLoggedIn);
@@ -27,7 +33,12 @@ export default function AppBar() {
       <Col span={20}>
         <Row justify="space-between">
           <Col span={12}>
-            <Menu mode="horizontal" theme="dark">
+            <Menu
+              onClick={handleClick}
+              selectedKeys={currentMenu}
+              mode="horizontal"
+              theme="dark"
+            >
               <Menu.Item icon={<HomeOutlined />} key="home">
                 <Link to={'/'}>Home</Link>
               </Menu.Item>
@@ -40,6 +51,8 @@ export default function AppBar() {
           </Col>
           <Col span={12}>
             <Menu
+              onClick={handleClick}
+              selectedKeys={currentMenu}
               mode="horizontal"
               theme="dark"
               style={{ justifyContent: 'flex-end' }}
@@ -61,7 +74,7 @@ export default function AppBar() {
                     key="logout"
                     onClick={onLogOut}
                   >
-                    <span>Log Out</span>
+                    Log Out
                   </Menu.Item>
                 </>
               )}
