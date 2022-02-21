@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import contactsOperations from 'redux/phonebook/phonebook-operations';
@@ -9,15 +10,16 @@ export default function Contact({ id, name, number }) {
   const onDelete = () => {
     dispatch(contactsOperations.deleteContact(id));
   };
+
   return (
-    <li className={s.item}>
+    <>
       <p>
         {name}: {number}
       </p>
-      <button className={s.button} onClick={onDelete} type="button">
+      <Button danger type="primary" onClick={onDelete}>
         Delete
-      </button>
-    </li>
+      </Button>
+    </>
   );
 }
 

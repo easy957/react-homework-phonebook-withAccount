@@ -9,6 +9,7 @@ import {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
+  changeFilter,
 } from './phonebook-actions';
 
 const contacts = createReducer([], {
@@ -18,7 +19,9 @@ const contacts = createReducer([], {
     state.filter(contact => contact.id !== payload),
 });
 
-const filter = createReducer('', {});
+const filter = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
+});
 
 const loading = createReducer(false, {
   [fetchContactsRequest]: () => true,

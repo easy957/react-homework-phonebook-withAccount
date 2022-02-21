@@ -1,63 +1,68 @@
-import { useState } from 'react';
+import { Button, Col, Form, Input, Row } from 'antd';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth/auth-operations';
 
-function RegisterPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function RegisterPage() {
   const dispatch = useDispatch();
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        return setName(value);
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-
-  const onSubmit = e => {
-    e.preventDefault();
+  const onSubmit = ({ name, email, password }) => {
     dispatch(authOperations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (
     <>
-      <h1>Registation</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={handleChange}
-          value={name}
-          type="text"
-          name="name"
-          placeholder="Name"
-        />
-        <input
-          onChange={handleChange}
-          value={email}
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          onChange={handleChange}
-          value={password}
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <button type="submit">Registrate</button>
-      </form>
+      <Row justify="center" align="middle" style={{ flex: 1 }}>
+        <Col xs={20} sm={12} lg={8}>
+          <h1 style={{ textAlign: 'center' }}>Registation</h1>
+          <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            initialValues={{ remember: true }}
+            onFinish={onSubmit}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[
+                { required: true, message: 'Please input your username!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: 'Please input your email!' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: 'Please input your password!' },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              wrapperCol={{
+                xs: { span: 24 },
+                sm: { span: 8, offset: 8 },
+              }}
+            >
+              <Button block type="primary" htmlType="submit">
+                Sign up
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
     </>
   );
 }
-
-export default RegisterPage;

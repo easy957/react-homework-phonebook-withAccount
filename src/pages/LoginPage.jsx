@@ -1,52 +1,64 @@
-import { useState } from 'react';
+import {
+  LockOutlined,
+  MailOutlined,
+  UserOutlined,
+} from '@ant-design/icons/lib/icons';
+import { Form, Button, Input, Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { authOperations } from 'redux/auth/auth-operations';
 
-function RegisterPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function LoginPage() {
   const dispatch = useDispatch();
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-
-  const onSubmit = e => {
-    e.preventDefault();
+  const onSubmit = ({ email, password }) => {
     dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={handleChange}
-          value={email}
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          onChange={handleChange}
-          value={password}
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-      </form>
-    </>
+    <Row justify="center" align="middle" style={{ flex: 1 }}>
+      <Col xs={20} sm={12} lg={8}>
+        <h1 style={{ textAlign: 'center' }}>Login</h1>
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={onSubmit}
+        >
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: 'Please input your Email!' }]}
+          >
+            <Input
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Please input your Password!' }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              block
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Log in
+            </Button>
+          </Form.Item>
+          <span>
+            Or <Link to="/registration">register now!</Link>
+          </span>
+        </Form>
+      </Col>
+    </Row>
   );
 }
-
-export default RegisterPage;

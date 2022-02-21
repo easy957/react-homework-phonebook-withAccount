@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import contactsOperations from 'redux/phonebook/phonebook-operations';
 import { getLoading } from 'redux/phonebook/phonebook-selectors';
-// import Filter from 'components/Filter';
+import Filter from 'components/Filter';
+import { Col, Divider, Row } from 'antd';
 
 export default function ContactsPage() {
   const dispatch = useDispatch();
@@ -14,13 +15,17 @@ export default function ContactsPage() {
   useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (
-    <>
-      <h1>PhoneBook</h1>
-      <ContactForm />
+    <Row justify="center">
+      <Col span={20}>
+        <h1>PhoneBook</h1>
+        <Divider orientation="left">Create contact</Divider>
+        <ContactForm />
 
-      <h2>Contacts</h2>
-      {/* <Filter /> */}
-      <ContactsList />
-    </>
+        <Divider orientation="left">Filter</Divider>
+        <Filter />
+        <Divider orientation="left">Contacts</Divider>
+        <ContactsList />
+      </Col>
+    </Row>
   );
 }
