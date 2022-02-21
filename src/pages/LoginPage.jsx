@@ -1,8 +1,4 @@
-import {
-  LockOutlined,
-  MailOutlined,
-  UserOutlined,
-} from '@ant-design/icons/lib/icons';
+import { LockOutlined, MailOutlined } from '@ant-design/icons/lib/icons';
 import { Form, Button, Input, Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';

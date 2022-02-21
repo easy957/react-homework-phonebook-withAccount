@@ -1,9 +1,7 @@
 import { SearchOutlined } from '@ant-design/icons/lib/icons';
 import { Col, Input, Row } from 'antd';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { changeFilter } from 'redux/phonebook/phonebook-actions';
-import { getFilter } from 'redux/phonebook/phonebook-selectors';
 
 export default function Filter() {
   const dispatch = useDispatch();
