@@ -7,6 +7,7 @@ export default function HomePage() {
       <Col span={20}>
         <h1>Home Page</h1>
         <h2>Welcome.</h2>
+        <br />
         <p>
           If you don't have an account please proceed to
           <Link to="/registration"> registration</Link> page.
