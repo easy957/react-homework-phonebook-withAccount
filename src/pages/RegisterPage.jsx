@@ -1,5 +1,6 @@
 import { Button, Col, Form, Input, Row } from 'antd';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { authOperations } from 'redux/auth/auth-operations';
 
 export default function RegisterPage() {
@@ -57,9 +58,12 @@ export default function RegisterPage() {
               }}
             >
               <Button block type="primary" htmlType="submit">
-                Sign up
+                Register
               </Button>
             </Form.Item>
+            <p style={{ textAlign: 'center' }}>
+              Already have an account? <Link to="/login">Sign in!</Link>
+            </p>
           </Form>
         </Col>
       </Row>

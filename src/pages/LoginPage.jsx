@@ -50,9 +50,9 @@ export default function LoginPage() {
               Log in
             </Button>
           </Form.Item>
-          <span>
+          <p>
             Or <Link to="/registration">register now!</Link>
-          </span>
+          </p>
         </Form>
       </Col>
     </Row>

@@ -61,6 +61,7 @@ export default function AppBar() {
               mode="horizontal"
               theme="dark"
               style={{ justifyContent: 'flex-end' }}
+              overflowedIndicator={<MenuOutlined />}
             >
               {!isLoggedIn && (
                 <>

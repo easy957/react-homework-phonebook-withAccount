@@ -12,18 +12,24 @@ export default function ContactsPage() {
   useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (
-    <Row justify="center">
-      <Col span={20}>
-        <h1>PhoneBook</h1>
-        <Divider orientation="left">Create contact</Divider>
-        <ContactForm />
+    <>
+      <Row justify="center">
+        <Col span={20}>
+          <h1>PhoneBook</h1>
+          <Divider orientation="left">Create contact</Divider>
+          <ContactForm />
 
-        <Divider orientation="left">Filter</Divider>
-        <Filter />
+          <Divider orientation="left">Filter</Divider>
+          <Filter />
 
-        <Divider orientation="left">Contacts</Divider>
-        <ContactsList />
-      </Col>
-    </Row>
+          <Divider orientation="left">Contacts</Divider>
+        </Col>
+      </Row>
+      <Row justify="center">
+        <Col xs={24} sm={20}>
+          <ContactsList />
+        </Col>
+      </Row>
+    </>
   );
 }

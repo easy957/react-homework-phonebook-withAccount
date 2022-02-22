@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import contactsOperations from 'redux/phonebook/phonebook-operations';
-import { Button, Form, Input, message, Spin } from 'antd';
-import { PhoneOutlined, UserAddOutlined } from '@ant-design/icons/lib/icons';
+import { Button, Form, Input, message } from 'antd';
+import {
+  LoadingOutlined,
+  PhoneOutlined,
+  UserAddOutlined,
+} from '@ant-design/icons/lib/icons';
 import { useForm } from 'antd/lib/form/Form';
 import { getContacts } from 'redux/phonebook/phonebook-selectors';
 import { useState } from 'react';
@@ -69,7 +73,7 @@ export default function ContactForm() {
       </Form.Item>
       <Form.Item>
         <Button disabled={isAdding} type="primary" htmlType="submit">
-          {isAdding ? <Spin /> : 'Add contact'}
+          {isAdding ? <LoadingOutlined /> : 'Add contact'}
         </Button>
       </Form.Item>
     </Form>
