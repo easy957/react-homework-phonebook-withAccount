@@ -17,7 +17,7 @@ export default function Filter() {
       >
         <span>Find contact by name:</span>
       </Col>
-      <Col span={24}>
+      <Col xs={24} md={8}>
         <Input
           prefix={<SearchOutlined />}
           placeholder="Name"
