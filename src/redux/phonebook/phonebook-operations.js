@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios';
 
 import {
@@ -30,7 +31,7 @@ const addContact = contact => async dispatch => {
   try {
     const { data } = await axios.post('/contacts', contact);
 
-    dispatch(addContactSuccess(data));
+    dispatch(addContactSuccess(data)).then(message.success('Contact created.'));
   } catch (error) {
     dispatch(addContactError(error.message));
   }
@@ -42,7 +43,10 @@ const deleteContact = contactId => async dispatch => {
   try {
     const { statusText } = await axios.delete(`/contacts/${contactId}`);
 
-    if (statusText === 'OK') dispatch(deleteContactSuccess(contactId));
+    if (statusText === 'OK')
+      dispatch(deleteContactSuccess(contactId)).then(
+        message.success('Contact deleted.')
+      );
   } catch (error) {
     dispatch(deleteContactError(error.message));
   }

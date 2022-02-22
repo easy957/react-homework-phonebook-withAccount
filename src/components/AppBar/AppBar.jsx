@@ -4,19 +4,25 @@ import {
   LoginOutlined,
   LogoutOutlined,
   UserAddOutlined,
+  MenuOutlined,
 } from '@ant-design/icons/lib/icons';
 import { Col, Menu, Row } from 'antd';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { SiFoodpanda } from 'react-icons/si';
 
 import { authOperations } from 'redux/auth/auth-operations';
-import { getIsLoggedIn } from 'redux/auth/auth-selectors';
+import { getIsLoggedIn, getUser } from 'redux/auth/auth-selectors';
+
+const { SubMenu } = Menu;
 
 export default function AppBar() {
   const [currentMenu, setCurrentMenu] = useState('');
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const user = useSelector(getUser);
 
   const onLogOut = () => {
     dispatch(authOperations.logOut());
@@ -26,18 +32,17 @@ export default function AppBar() {
     setCurrentMenu(e.key);
   };
 
-  const isLoggedIn = useSelector(getIsLoggedIn);
-
   return (
     <Row justify="center">
       <Col span={20}>
         <Row justify="space-between">
-          <Col span={18}>
+          <Col span={12}>
             <Menu
               onClick={handleClick}
               selectedKeys={currentMenu}
               mode="horizontal"
               theme="dark"
+              overflowedIndicator={<MenuOutlined />}
             >
               <Menu.Item icon={<HomeOutlined />} key="home">
                 <Link to={'/'}>Home</Link>
@@ -49,7 +54,7 @@ export default function AppBar() {
               )}
             </Menu>
           </Col>
-          <Col span={6}>
+          <Col span={12}>
             <Menu
               onClick={handleClick}
               selectedKeys={currentMenu}
@@ -68,15 +73,26 @@ export default function AppBar() {
                 </>
               )}
               {isLoggedIn && (
-                <>
+                <SubMenu
+                  key="SubMenu"
+                  title={user.name}
+                  icon={
+                    <SiFoodpanda
+                      style={{ verticalAlign: 'middle' }}
+                      size={24}
+                    />
+                  }
+                >
+                  <Menu.Item key="userEmail">{user.email}</Menu.Item>
                   <Menu.Item
+                    danger
                     icon={<LogoutOutlined />}
                     key="logout"
                     onClick={onLogOut}
                   >
                     Log Out
                   </Menu.Item>
-                </>
+                </SubMenu>
               )}
             </Menu>
           </Col>
