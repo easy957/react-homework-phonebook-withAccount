@@ -32,7 +32,7 @@ export default function AppBar() {
     <Row justify="center">
       <Col span={20}>
         <Row justify="space-between">
-          <Col span={12}>
+          <Col span={18}>
             <Menu
               onClick={handleClick}
               selectedKeys={currentMenu}
@@ -49,7 +49,7 @@ export default function AppBar() {
               )}
             </Menu>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Menu
               onClick={handleClick}
               selectedKeys={currentMenu}

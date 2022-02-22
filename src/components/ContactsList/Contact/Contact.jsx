@@ -1,4 +1,5 @@
-import { Button, Spin } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons/lib/icons';
+import { Button, Col, Row, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,15 +17,19 @@ export default function Contact({ id, name, number }) {
   };
 
   return (
-    <>
-      <p>
-        {name} - <b>{number}</b>
-      </p>
+    <Row wrap={false} justify="space-between" align="middle">
+      <Col>
+        <p>
+          {name} - <b>{number}</b>
+        </p>
+      </Col>
 
-      <Button disabled={isDeleting} danger type="primary" onClick={onDelete}>
-        {isDeleting ? <Spin /> : 'Delete'}
-      </Button>
-    </>
+      <Col>
+        <Button disabled={isDeleting} danger type="primary" onClick={onDelete}>
+          {isDeleting ? <Spin /> : <DeleteOutlined />}
+        </Button>
+      </Col>
+    </Row>
   );
 }
 

@@ -6,10 +6,12 @@ export default function HomePage() {
     <Row justify="center">
       <Col span={20}>
         <h1>Home Page</h1>
+        <h2>Welcome.</h2>
         <p>
-          Welcome. If you don't have an account please proceed to
-          <Link to="/registration"> registration</Link> page. Or{' '}
-          <Link to="/login">sign in</Link> and proceed to{' '}
+          If you don't have an account please proceed to
+          <Link to="/registration"> registration</Link> page.
+          <br />
+          <br /> Or <Link to="/login">sign in</Link> and proceed to{' '}
           <Link to="/contacts">Phonebook </Link>
           page.
         </p>

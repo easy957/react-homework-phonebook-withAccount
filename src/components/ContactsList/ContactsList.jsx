@@ -11,7 +11,7 @@ export default function ContactsList() {
       bordered
       dataSource={contacts}
       renderItem={({ id, name, number }) => (
-        <List.Item key={id}>
+        <List.Item style={{ display: 'block' }} key={id}>
           <Contact id={id} name={name} number={number} />
         </List.Item>
       )}

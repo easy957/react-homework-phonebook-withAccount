@@ -32,12 +32,16 @@ export default function ContactForm() {
     );
   }
 
+  const getLayoutFormStyle = () =>
+    window.innerWidth < 576 ? 'horizontal' : 'inline';
+
   return (
     <Form
       form={form}
       name="create_contact"
-      layout="inline"
+      layout={getLayoutFormStyle()}
       onFinish={handleSubmit}
+      wrapperCol={{ span: 24 }}
     >
       <Form.Item
         name="name"
