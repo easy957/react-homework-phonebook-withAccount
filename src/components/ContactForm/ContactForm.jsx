@@ -36,14 +36,13 @@ export default function ContactForm() {
     );
   }
 
-  const getLayoutFormStyle = () =>
-    window.innerWidth < 576 ? 'horizontal' : 'inline';
+  const getLayoutFormStyle = () => (window.innerWidth < 690 ? true : false);
 
   return (
     <Form
       form={form}
       name="create_contact"
-      layout={getLayoutFormStyle()}
+      layout={getLayoutFormStyle() ? 'horizontal' : 'inline'}
       onFinish={handleSubmit}
       wrapperCol={{ span: 24 }}
     >
@@ -72,7 +71,12 @@ export default function ContactForm() {
         />
       </Form.Item>
       <Form.Item>
-        <Button disabled={isAdding} type="primary" htmlType="submit">
+        <Button
+          block={getLayoutFormStyle()}
+          disabled={isAdding}
+          type="primary"
+          htmlType="submit"
+        >
           {isAdding ? <LoadingOutlined /> : 'Add contact'}
         </Button>
       </Form.Item>
